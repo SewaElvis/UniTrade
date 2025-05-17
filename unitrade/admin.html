@@ -1,0 +1,669 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - UniTrade</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --secondary: #3f37c9;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --success: #4cc9f0;
+            --danger: #f72585;
+            --border-radius: 0.375rem;
+            --box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+ 
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, 
+                        Ubuntu, Cantarell, sans-serif;
+            line-height: 1.5;
+            color: var(--text);
+            background-color: var(--lighter);
+            -webkit-font-smoothing: antialiased;
+            background-image: url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-blend-mode: overlay;
+            background-color: rgba(21, 21, 21, 0.9);
+        }
+        
+        header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        
+        .nav-links a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius);
+            font-weight: 500;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid transparent;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .btn-success {
+            background-color: #4cc9f0;
+            color: white;
+        }
+        
+        .btn-success:hover {
+            background-color: #3ab7dd;
+        }
+        
+        .btn-danger {
+            background-color: var(--danger);
+            color: white;
+        }
+        
+        .btn-danger:hover {
+            background-color: #e5177e;
+        }
+        
+        main {
+            padding: 2rem 0;
+        }
+        
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .admin-header h1 {
+            font-size: 1.75rem;
+            color: var(--dark);
+        }
+        
+        .admin-stats {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            flex: 1;
+            box-shadow: var(--box-shadow);
+        }
+        
+        .stat-card h3 {
+            font-size: 0.9rem;
+            color: var(--gray);
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-card p {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .table-container {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        thead {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        th, td {
+            padding: 1rem;
+            text-align: left;
+        }
+        
+        th {
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.5px;
+        }
+        
+        tbody tr {
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        tbody tr:last-child {
+            border-bottom: none;
+        }
+        
+        tbody tr:hover {
+            background-color: rgba(67, 97, 238, 0.05);
+        }
+        
+        .product-image {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 1rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .status-pending {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        
+        .actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .no-products {
+            padding: 2rem;
+            text-align: center;
+            color: var(--gray);
+            background-color: white;
+            border-radius: var(--border-radius);
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: var(--border-radius);
+            width: 90%;
+            max-width: 500px;
+            padding: 2rem;
+            box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.2);
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .modal-header h2 {
+            font-size: 1.25rem;
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray);
+        }
+        
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        @media (max-width: 768px) {
+            .admin-stats {
+                flex-direction: column;
+            }
+            
+            th, td {
+                padding: 0.75rem 0.5rem;
+            }
+            
+            .actions {
+                flex-direction: column;
+            }
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 2rem 0;
+            margin-top: 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-column h3 {
+            font-size: 1.125rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: #9ca3af;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid #374151;
+            color: #9ca3af;
+            font-size: 0.875rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <a href="index.html" class="logo">UniTrade</a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="sell.html">Sell Item</a>
+                <a href="admin.html">Admin</a>
+                <a href="index.html" class="btn btn-outline">Browse Items</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="admin-header">
+                <h1>Product Approvals</h1>
+                <div>
+                    <button class="btn btn-primary" id="refresh-btn">
+                        <i class="fas fa-sync-alt"></i> Refresh
+                    </button>
+                </div>
+            </div>
+            
+            <div class="admin-stats">
+                <div class="stat-card">
+                    <h3>Pending Approval</h3>
+                    <p id="pending-count">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Approved Today</h3>
+                    <p id="approved-today">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Total Products</h3>
+                    <p id="total-products">0</p>
+                </div>
+            </div>
+            
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Details</th>
+                            <th>Seller</th>
+                            <th>University</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="pending-products">
+                        <!-- Products will be loaded here -->
+                    </tbody>
+                </table>
+                <div id="no-products" class="no-products">
+                    <i class="fas fa-check-circle" style="font-size: 2rem; color: #4cc9f0; margin-bottom: 1rem;"></i>
+                    <h3>No products pending approval</h3>
+                    <p>All caught up! Check back later for new submissions.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Rejection Modal -->
+        <div class="modal" id="reject-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Reject Product</h2>
+                    <button class="close-modal">&times;</button>
+                </div>
+                <p>Are you sure you want to reject this product listing?</p>
+                <div class="form-group">
+                    <label for="reject-reason">Reason for rejection (optional):</label>
+                    <textarea id="reject-reason" rows="3" placeholder="Provide feedback to the seller..."></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-outline" id="cancel-reject">Cancel</button>
+                    <button class="btn btn-danger" id="confirm-reject">Reject Product</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>UniTrade</h3>
+                    <p>The university marketplace connecting students across Uganda.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="sell.html">Sell an Item</a></li>
+                        <li><a href="#">How It Works</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Universities</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Makerere</a></li>
+                        <li><a href="#">UCU</a></li>
+                        <li><a href="#">Kyambogo</a></li>
+                        <li><a href="#">KIU</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <ul class="footer-links">
+                        <li><a href="tel:+256700000000">+256 700 000000</a></li>
+                        <li><a href="mailto:info@unitrade.ug">info@unitrade.ug</a></li>
+                        <li><a href="#">Campus Locations</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 UniTrade. All rights reserved. | All prices in UGX</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            let currentProductId = null;
+            const rejectModal = document.getElementById('reject-modal');
+            const rejectReason = document.getElementById('reject-reason');
+            const cancelRejectBtn = document.getElementById('cancel-reject');
+            const confirmRejectBtn = document.getElementById('confirm-reject');
+            const closeModalBtn = document.querySelector('.close-modal');
+            const refreshBtn = document.getElementById('refresh-btn');
+            
+            // Load products initially
+            loadProducts();
+            
+            // Refresh button click
+            refreshBtn.addEventListener('click', loadProducts);
+            
+            // Modal controls
+            function openRejectModal(productId) {
+                currentProductId = productId;
+                rejectModal.style.display = 'flex';
+                rejectReason.value = '';
+            }
+            
+            function closeRejectModal() {
+                rejectModal.style.display = 'none';
+            }
+            
+            cancelRejectBtn.addEventListener('click', closeRejectModal);
+            closeModalBtn.addEventListener('click', closeRejectModal);
+            
+            // Click outside modal to close
+            window.addEventListener('click', function(event) {
+                if (event.target === rejectModal) {
+                    closeRejectModal();
+                }
+            });
+            
+            // Confirm rejection
+            confirmRejectBtn.addEventListener('click', function() {
+                if (currentProductId) {
+                    rejectProduct(currentProductId, rejectReason.value);
+                    closeRejectModal();
+                }
+            });
+            
+            function loadProducts() {
+                const container = document.getElementById('pending-products');
+                const noProductsDiv = document.getElementById('no-products');
+                const products = JSON.parse(localStorage.getItem('universityProducts')) || [];
+                const pendingProducts = products.filter(p => !p.approved);
+                const approvedProducts = products.filter(p => p.approved);
+                
+                // Update stats
+                document.getElementById('pending-count').textContent = pendingProducts.length;
+                document.getElementById('total-products').textContent = products.length;
+                
+                // Calculate approved today (mock data - in real app you'd check dates)
+                const approvedTodayCount = Math.min(5, approvedProducts.length);
+                document.getElementById('approved-today').textContent = approvedTodayCount;
+                
+                // Clear existing rows
+                container.innerHTML = '';
+                
+                if (pendingProducts.length === 0) {
+                    noProductsDiv.style.display = 'block';
+                    return;
+                } else {
+                    noProductsDiv.style.display = 'none';
+                }
+                
+                pendingProducts.forEach(product => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 1rem;">
+                                <img src="${product.imageUrl}" alt="${product.name}" class="product-image">
+                                <div>
+                                    <strong>${product.name}</strong><br>
+                                    UGX ${product.price.toLocaleString()}
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div style="font-size: 0.875rem;">
+                                <div><strong>Condition:</strong> ${product.condition}</div>
+                                <div style="margin-top: 0.5rem;">${product.description.substring(0, 50)}...</div>
+                            </div>
+                        </td>
+                        <td>
+                            <div style="font-size: 0.875rem;">
+                                <div><i class="fas fa-phone"></i> ${product.phone}</div>
+                                <div style="margin-top: 0.5rem;"><i class="fas fa-clock"></i> Just now</div>
+                            </div>
+                        </td>
+                        <td>${product.university}</td>
+                        <td><span class="status-badge status-pending">Pending Review</span></td>
+                        <td>
+                            <div class="actions">
+                                <button class="btn btn-success approve-btn" data-id="${product.id}">
+                                    <i class="fas fa-check"></i> Approve
+                                </button>
+                                <button class="btn btn-danger reject-btn" data-id="${product.id}">
+                                    <i class="fas fa-times"></i> Reject
+                                </button>
+                            </div>
+                        </td>
+                    `;
+                    container.appendChild(row);
+                });
+                
+                // Approve button click
+                document.querySelectorAll('.approve-btn').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const productId = parseInt(this.dataset.id);
+                        approveProduct(productId);
+                    });
+                });
+                
+                // Reject button click
+                document.querySelectorAll('.reject-btn').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const productId = parseInt(this.dataset.id);
+                        openRejectModal(productId);
+                    });
+                });
+            }
+            
+            function approveProduct(productId) {
+                const products = JSON.parse(localStorage.getItem('universityProducts')) || [];
+                const updatedProducts = products.map(p => {
+                    if (p.id === productId) {
+                        return { ...p, approved: true, approvedAt: new Date().toISOString() };
+                    }
+                    return p;
+                });
+                
+                localStorage.setItem('universityProducts', JSON.stringify(updatedProducts));
+                
+                // Also add to approved products list
+                const approvedProducts = JSON.parse(localStorage.getItem('approvedProducts')) || [];
+                const newlyApproved = products.find(p => p.id === productId);
+                if (newlyApproved) {
+                    approvedProducts.push({...newlyApproved, approved: true, approvedAt: new Date().toISOString()});
+                    localStorage.setItem('approvedProducts', JSON.stringify(approvedProducts));
+                }
+                
+                showToast('Product approved and published to marketplace!', 'success');
+                loadProducts();
+            }
+            
+            function rejectProduct(productId, reason = '') {
+                const products = JSON.parse(localStorage.getItem('universityProducts')) || [];
+                const updatedProducts = products.filter(p => p.id !== productId);
+                localStorage.setItem('universityProducts', JSON.stringify(updatedProducts));
+                
+                // In a real app, you might store rejected products with reasons
+                const rejectedProducts = JSON.parse(localStorage.getItem('rejectedProducts')) || [];
+                const rejectedProduct = products.find(p => p.id === productId);
+                if (rejectedProduct) {
+                    rejectedProducts.push({
+                        ...rejectedProduct,
+                        rejectedAt: new Date().toISOString(),
+                        rejectionReason: reason
+                    });
+                    localStorage.setItem('rejectedProducts', JSON.stringify(rejectedProducts));
+                }
+                
+                showToast('Product has been rejected', 'error');
+                loadProducts();
+            }
+            
+            function showToast(message, type = 'success') {
+                // In a real app, you'd use a proper toast notification library
+                alert(`${type === 'success' ? '✓' : '✗'} ${message}`);
+            }
+        });
+    </script>
+</body>
+</html>

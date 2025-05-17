@@ -1,0 +1,1410 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniTrade - University Marketplace</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ====== Enhanced UniTrade CSS ====== */
+        
+        /* 1. Base Styles & Variables */
+        :root {
+            --primary: #4f46e5;
+            --primary-light: #6366f1;
+            --primary-dark: #4338ca;
+            --secondary: #10b981;
+            --danger: #ef4444;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --dark: #1f2937;
+            --light: #f3f4f6;
+            --lighter: #f9fafb;
+            --text: #374151;
+            --text-light: #6b7280;
+            --border: #e5e7eb;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --radius-sm: 0.375rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+            --transition: all 0.2s ease-in-out;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, 
+                        Ubuntu, Cantarell, sans-serif;
+            line-height: 1.5;
+            color: var(--text);
+            background-color: var(--lighter);
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        /* 2. Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 600;
+            line-height: 1.25;
+            color: var(--dark);
+        }
+        
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+        
+        /* 3. Layout & Containers */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        /* 4. Header Styles */
+        header {
+            background-color: white;
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .logo::before {
+            content: "🛒";
+            font-size: 1.25rem;
+        }
+        
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .nav-links a.active {
+            color: var(--primary);
+        }
+        
+        .nav-links a.active::after {
+            content: "";
+            position: absolute;
+            bottom: -0.5rem;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary);
+        }
+        
+        /* 5. Button Styles */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.625rem 1.25rem;
+            border-radius: var(--radius-sm);
+            font-weight: 500;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            text-decoration: none;
+            gap: 0.5rem;
+            white-space: nowrap;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background-color: rgba(79, 70, 229, 0.05);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .btn-danger {
+            background-color: var(--danger);
+            color: white;
+        }
+        
+        .btn-danger:hover {
+            background-color: #dc2626;
+        }
+        
+        .btn-sm {
+            padding: 0.375rem 0.75rem;
+            font-size: 0.875rem;
+        }
+        
+        /* 6. Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #4f46e5 0%, #8b5cf6 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.15;
+            z-index: 0;
+        }
+        
+        .hero .container {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .hero p {
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            color: rgba(255, 255, 255, 0.9);
+            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        /* 7. University Filter */
+        .university-filter {
+            background-color: white;
+            padding: 1.25rem;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            margin: 2rem 0;
+        }
+        
+        .filter-title {
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: var(--dark);
+        }
+        
+        .university-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+        
+        .uni-btn {
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            background-color: var(--light);
+            border: none;
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        
+        .uni-btn.active {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .uni-btn:hover:not(.active) {
+            background-color: #e5e7eb;
+        }
+        
+        /* 8. Products Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2.5rem 0;
+        }
+        
+        .product-card {
+            background-color: white;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            border: 1px solid var(--border);
+            position: relative;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .product-badge {
+            position: absolute;
+            top: 0.75rem;
+            left: 0.75rem;
+            background-color: var(--primary);
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.75rem;
+            font-weight: 600;
+            z-index: 1;
+        }
+        
+        .product-image-container {
+            position: relative;
+            overflow: hidden;
+            height: 200px;
+        }
+        
+        .product-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .product-card:hover .product-image {
+            transform: scale(1.05);
+        }
+        
+        .product-details {
+            padding: 1.25rem;
+        }
+        
+        .product-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .product-university {
+            color: var(--text-light);
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+        
+        .product-price {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 0.5rem 0;
+        }
+        
+        .product-condition {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            background-color: var(--light);
+            border-radius: var(--radius-sm);
+            font-size: 0.75rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+        
+        .product-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        
+        .seller-contact {
+            border-top: 1px solid var(--border);
+            padding-top: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .contact-label {
+            font-size: 0.875rem;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+        
+        .contact-methods {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .contact-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            padding: 0.375rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .contact-phone {
+            background-color: #d1fae5;
+            color: #065f46;
+        }
+        
+        .contact-phone:hover {
+            background-color: #a7f3d0;
+        }
+        
+        .contact-whatsapp {
+            background-color: #dbeafe;
+            color: #1e40af;
+        }
+        
+        .contact-whatsapp:hover {
+            background-color: #bfdbfe;
+        }
+        
+        /* 9. Cart System */
+        .cart-tray {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            max-width: 400px;
+            height: 100vh;
+            background-color: white;
+            box-shadow: var(--shadow-lg);
+            z-index: 100;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .cart-tray.open {
+            transform: translateX(0);
+        }
+        
+        .cart-header {
+            padding: 1.25rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .cart-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+        
+        .cart-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-light);
+        }
+        
+        .cart-items {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1.25rem;
+        }
+        
+        .cart-item {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+        
+        .cart-item-image {
+            width: 80px;
+            height: 80px;
+            border-radius: var(--radius-sm);
+            object-fit: cover;
+            border: 1px solid var(--border);
+        }
+        
+        .cart-item-details {
+            flex: 1;
+        }
+        
+        .cart-item-title {
+            font-size: 0.95rem;
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .cart-item-price {
+            font-weight: 600;
+            color: var(--primary);
+            margin: 0.25rem 0;
+        }
+        
+        .cart-item-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+        }
+        
+        .quantity-btn {
+            background-color: var(--light);
+            border: none;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        
+        .quantity-input {
+            width: 40px;
+            text-align: center;
+            border: none;
+            background-color: transparent;
+            font-weight: 500;
+        }
+        
+        .remove-item {
+            background: none;
+            border: none;
+            color: var(--danger);
+            cursor: pointer;
+            font-size: 0.875rem;
+        }
+        
+        .cart-footer {
+            padding: 1.25rem;
+            border-top: 1px solid var(--border);
+            background-color: var(--lighter);
+        }
+        
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 600;
+            font-size: 1.125rem;
+            margin-bottom: 1rem;
+        }
+        
+        .cart-empty {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .cart-empty-icon {
+            font-size: 3rem;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+        
+        /* 10. Notification System */
+        .notification-tray {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            width: 350px;
+            max-height: 80vh;
+            overflow-y: auto;
+            background-color: white;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-lg);
+            z-index: 90;
+            transform: translateX(120%);
+            transition: transform 0.3s ease-out;
+            border: 1px solid var(--border);
+        }
+        
+        .notification-tray.open {
+            transform: translateX(0);
+        }
+        
+        .notification-header {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .notification-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+        }
+        
+        .notification-count {
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .notification-list {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+        
+        .notification-item {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+            transition: background-color 0.2s;
+            cursor: pointer;
+        }
+        
+        .notification-item:hover {
+            background-color: var(--lighter);
+        }
+        
+        .notification-item.unread {
+            background-color: #f0f9ff;
+        }
+        
+        .notification-message {
+            font-size: 0.875rem;
+            margin-bottom: 0.25rem;
+        }
+        
+        .notification-time {
+            font-size: 0.75rem;
+            color: var(--text-light);
+        }
+        
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: var(--danger);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        /* 11. Header Icons */
+        .header-icons {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .icon-btn {
+            position: relative;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text);
+            font-size: 1.25rem;
+            padding: 0.5rem;
+        }
+        
+        /* 12. Overlay */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 80;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        
+        .overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        /* 13. Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.125rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-links a {
+            color: #9ca3af;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid #374151;
+            color: #9ca3af;
+            font-size: 0.875rem;
+        }
+        
+        /* 14. Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-links {
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cart-tray {
+                max-width: 100%;
+            }
+            
+            .notification-tray {
+                width: 90%;
+                right: 5%;
+            }
+        }
+        
+        /* 15. Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animate-fadeIn {
+            animation: fadeIn 0.3s ease-out forwards;
+        }
+        
+        /* 16. Utility Classes */
+        .hidden {
+            display: none !important;
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+        
+        .mt-2 {
+            margin-top: 0.5rem;
+        }
+        
+        .pulse {
+            animation: pulse 0.5s ease-in-out;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <a href="index.html" class="logo">UniTrade</a>
+            <div class="nav-links">
+                <a href="index.html" class="active">Home</a>
+                <a href="sell.html">Sell Item</a>
+                <a href="admin.html">Admin</a>
+                <div class="header-icons">
+                    <button class="icon-btn" id="notificationToggle">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge" id="notificationBadge">3</span>
+                    </button>
+                    <button class="icon-btn" id="cartToggle">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="notification-badge" id="cartBadge">0</span>
+                    </button>
+                    <a href="index.html" class="btn btn-outline">Browse Items</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Notification Tray -->
+    <div class="notification-tray" id="notificationTray">
+        <div class="notification-header">
+            <h3 class="notification-title">Notifications</h3>
+            <span class="notification-count" id="notificationCount">3</span>
+        </div>
+        <ul class="notification-list" id="notificationList">
+            <li class="notification-item unread">
+                <div class="notification-message">Your item "Calculus Textbook" has been approved</div>
+                <div class="notification-time">2 minutes ago</div>
+            </li>
+            <li class="notification-item unread">
+                <div class="notification-message">New message from John about your MacBook Pro</div>
+                <div class="notification-time">1 hour ago</div>
+            </li>
+            <li class="notification-item">
+                <div class="notification-message">Welcome to UniTrade! Start selling your items today</div>
+                <div class="notification-time">2 days ago</div>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Shopping Cart Tray -->
+    <div class="cart-tray" id="cartTray">
+        <div class="cart-header">
+            <h3 class="cart-title">Your Cart</h3>
+            <button class="cart-close" id="cartClose">&times;</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <!-- Cart items will be added here dynamically -->
+            <div class="cart-empty">
+                <div class="cart-empty-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                </div>
+                <p>Your cart is empty</p>
+                <a href="index.html" class="btn btn-primary mt-2">Browse Items</a>
+            </div>
+        </div>
+        <div class="cart-footer hidden" id="cartFooter">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cartTotal">UGX 0</span>
+            </div>
+            <button class="btn btn-primary" style="width: 100%;">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Home Page -->
+        <section id="home-page">
+            <section class="hero">
+                <div class="container">
+                    <h1>Buy & Sell Within Your University</h1>
+                    <p>Connect with verified students and staff at UCU, Kyambogo, Makerere, KIU, Ndejje, and other Ugandan universities</p>
+                    <a href="sell.html" class="btn btn-primary">Sell Your Item</a>
+                </div>
+            </section>
+
+            <div class="container">
+                <div class="university-filter">
+                    <div class="filter-title">Filter by University:</div>
+                    <div class="university-buttons">
+                        <button class="uni-btn active" data-uni="all">All Universities</button>
+                        <button class="uni-btn" data-uni="Makerere">Makerere</button>
+                        <button class="uni-btn" data-uni="UCU">UCU</button>
+                        <button class="uni-btn" data-uni="Kyambogo">Kyambogo</button>
+                        <button class="uni-btn" data-uni="KIU">KIU</button>
+                        <button class="uni-btn" data-uni="Ndejje">Ndejje</button>
+                        <button class="uni-btn" data-uni="Kampala">Kampala</button>
+                        <button class="uni-btn" data-uni="ISBAT">ISBAT</button>
+                        <button class="uni-btn" data-uni="Victoria">Victoria</button>
+                        <button class="uni-btn" data-uni="St. Laurence">St. Laurence</button>
+                    </div>
+                </div>
+
+                <div class="products-grid" id="products-container">
+                    <!-- Products will be loaded here by JavaScript -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>UniTrade</h3>
+                    <p>The university marketplace connecting students across Uganda.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="sell.html">Sell an Item</a></li>
+                        <li><a href="#">How It Works</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Universities</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Makerere</a></li>
+                        <li><a href="#">UCU</a></li>
+                        <li><a href="#">Kyambogo</a></li>
+                        <li><a href="#">KIU</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <ul class="footer-links">
+                        <li><a href="tel:+256700000000">+256 700 000000</a></li>
+                        <li><a href="mailto:info@unitrade.ug">info@unitrade.ug</a></li>
+                        <li><a href="#">Campus Locations</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 UniTrade. All rights reserved. | All prices in UGX</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Sample product data with high-quality images
+        const products = [
+            {
+                id: 1,
+                name: "Calculus Textbook (2023 Edition)",
+                price: 50000,
+                university: "Makerere",
+                condition: "Used - Good",
+                description: "Essential for first year engineering students. Minimal highlighting. Includes practice problems.",
+                phone: "0777123456",
+                imageUrl: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
+                approved: true,
+                featured: true
+            },
+            {
+                id: 2,
+                name: "MacBook Pro 2019 (13-inch)",
+                price: 2500000,
+                university: "UCU",
+                condition: "Used - Like New",
+                description: "8GB RAM, 256GB SSD. Perfect condition with original box and accessories. Battery health 95%.",
+                phone: "0700123456",
+                imageUrl: "https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
+                approved: true,
+                featured: true
+            },
+            {
+                id: 3,
+                name: "Dorm Mini Fridge (50L)",
+                price: 180000,
+                university: "Kyambogo",
+                condition: "Used - Good",
+                description: "Works perfectly. Includes freezer compartment. Selling because I'm graduating.",
+                phone: "0755123456",
+                imageUrl: "https://images.unsplash.com/photo-1591488320449-011701bb6704?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
+                approved: true
+            },
+            {
+                id: 4,
+                name: "Graphing Calculator (Casio fx-991EX)",
+                price: 120000,
+                university: "KIU",
+                condition: "New",
+                description: "Brand new in box. Essential for engineering and math students.",
+                phone: "0788123456",
+                imageUrl: "https://images.unsplash.com/photo-1587145820266-a5951ee6f620?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
+                approved: true,
+                featured: true
+            },
+            {
+                id: 5,
+                name: "Accounting Notes (ACC 101 & 102)",
+                price: 20000,
+                university: "Ndejje",
+                condition: "Used - Good",
+                description: "Comprehensive handwritten notes covering all topics. Includes practice questions.",
+                phone: "0799123456",
+                imageUrl: "https://images.unsplash.com/photo-1589998059171-988d887df646?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
+                approved: true
+            },
+            {
+                id: 6,
+                name: "Mountain Bike (26-inch)",
+                price: 350000,
+                university: "Kampala",
+                condition: "Used - Fair",
+                description: "Good condition mountain bike. Recently serviced. Perfect for campus transport.",
+                phone: "0776123456",
+                imageUrl: "https://images.unsplash.com/photo-1485965120184-e220f721d03e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
+                approved: true
+            },
+            {
+                id: 7,
+                name: "Wireless Headphones (Sony WH-1000XM4)",
+                price: 800000,
+                university: "Makerere",
+                condition: "Used - Excellent",
+                description: "Premium noise-cancelling headphones with all original accessories. 6 months warranty remaining.",
+                phone: "0782123456",
+                imageUrl: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
+                approved: true,
+                featured: true
+            },
+            {
+                id: 8,
+                name: "Chemistry Lab Coat (Size M)",
+                price: 30000,
+                university: "Kyambogo",
+                condition: "New",
+                description: "Brand new lab coat with university logo. Never used. Perfect for science students.",
+                phone: "0750123456",
+                imageUrl: "https://images.unsplash.com/photo-1581094271901-8022df4466f9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
+                approved: true
+            }
+        ];
+
+        // Cart system
+        let cart = JSON.parse(localStorage.getItem('universityCart')) || [];
+        
+        // Notification system
+        const notifications = [
+            {
+                id: 1,
+                message: "Your item 'Calculus Textbook' has been approved",
+                time: "2 minutes ago",
+                read: false
+            },
+            {
+                id: 2,
+                message: "New message from John about your MacBook Pro",
+                time: "1 hour ago",
+                read: false
+            },
+            {
+                id: 3,
+                message: "Welcome to UniTrade! Start selling your items today",
+                time: "2 days ago",
+                read: true
+            }
+        ];
+
+        // DOM Elements
+        const productsContainer = document.getElementById('products-container');
+        const cartTray = document.getElementById('cartTray');
+        const cartItems = document.getElementById('cartItems');
+        const cartFooter = document.getElementById('cartFooter');
+        const cartBadge = document.getElementById('cartBadge');
+        const cartTotal = document.getElementById('cartTotal');
+        const cartToggle = document.getElementById('cartToggle');
+        const cartClose = document.getElementById('cartClose');
+        const overlay = document.getElementById('overlay');
+        const notificationTray = document.getElementById('notificationTray');
+        const notificationToggle = document.getElementById('notificationToggle');
+        const notificationList = document.getElementById('notificationList');
+        const notificationBadge = document.getElementById('notificationBadge');
+        const notificationCount = document.getElementById('notificationCount');
+
+        // Display products
+        function displayProducts(filterUniversity = 'all') {
+            productsContainer.innerHTML = '';
+            
+            const filteredProducts = filterUniversity === 'all' 
+                ? products.filter(p => p.approved)
+                : products.filter(p => p.approved && p.university === filterUniversity);
+            
+            if (filteredProducts.length === 0) {
+                productsContainer.innerHTML = `
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 40px;">
+                        <i class="fas fa-search" style="font-size: 2rem; color: var(--text-light); margin-bottom: 1rem;"></i>
+                        <p>No products found for this university</p>
+                        <a href="sell.html" class="btn btn-primary mt-2">Sell an Item</a>
+                    </div>
+                `;
+                return;
+            }
+            
+            filteredProducts.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.className = 'product-card animate-fadeIn';
+                
+                // Check if product is in cart
+                const inCart = cart.some(item => item.id === product.id);
+                const cartBtnText = inCart ? 'Added to Cart' : 'Add to Cart';
+                const cartBtnClass = inCart ? 'btn-outline' : 'btn-primary';
+                
+                productCard.innerHTML = `
+                    ${product.featured ? '<span class="product-badge">Featured</span>' : ''}
+                    <div class="product-image-container">
+                        <img src="${product.imageUrl}" alt="${product.name}" class="product-image">
+                    </div>
+                    <div class="product-details">
+                        <h3 class="product-title">${product.name}</h3>
+                        <p class="product-university">
+                            <i class="fas fa-university"></i> ${product.university} University
+                        </p>
+                        <p class="product-price">UGX ${product.price.toLocaleString()}</p>
+                        <span class="product-condition">${product.condition}</span>
+                        <div class="product-actions">
+                            <button class="btn ${cartBtnClass} btn-sm add-to-cart" data-id="${product.id}">
+                                <i class="fas ${inCart ? 'fa-check' : 'fa-cart-plus'}"></i> ${cartBtnText}
+                            </button>
+                            <a href="tel:${product.phone}" class="btn btn-outline btn-sm">
+                                <i class="fas fa-phone"></i> Call
+                            </a>
+                        </div>
+                        <div class="seller-contact">
+                            <p class="contact-label">Contact seller:</p>
+                            <div class="contact-methods">
+                                <a href="tel:${product.phone}" class="contact-btn contact-phone">
+                                    <i class="fas fa-phone"></i> ${product.phone}
+                                </a>
+                                <a href="https://wa.me/256${product.phone.substring(1)}" class="contact-btn contact-whatsapp">
+                                    <i class="fab fa-whatsapp"></i> WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                productsContainer.appendChild(productCard);
+            });
+            
+            // Add event listeners to new cart buttons
+            document.querySelectorAll('.add-to-cart').forEach(button => {
+                button.addEventListener('click', function() {
+                    const productId = parseInt(this.dataset.id);
+                    addToCart(productId);
+                });
+            });
+        }
+
+        // Add to cart function
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+            
+            // Check if already in cart
+            const existingItem = cart.find(item => item.id === productId);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    ...product,
+                    quantity: 1
+                });
+            }
+            
+            // Update cart in localStorage
+            localStorage.setItem('universityCart', JSON.stringify(cart));
+            
+            // Update UI
+            updateCartBadge();
+            displayProducts();
+            renderCartItems();
+            
+            // Show feedback
+            const productCard = document.querySelector(`.add-to-cart[data-id="${productId}"]`);
+            if (productCard) {
+                productCard.innerHTML = '<i class="fas fa-check"></i> Added to Cart';
+                productCard.classList.remove('btn-primary');
+                productCard.classList.add('btn-outline');
+                
+                // Add temporary animation class
+                productCard.classList.add('pulse');
+                setTimeout(() => {
+                    productCard.classList.remove('pulse');
+                }, 500);
+            }
+        }
+
+        // Update cart badge
+        function updateCartBadge() {
+            const itemCount = cart.reduce((total, item) => total + item.quantity, 0);
+            cartBadge.textContent = itemCount;
+            cartBadge.style.display = itemCount > 0 ? 'flex' : 'none';
+        }
+
+        // Render cart items
+        function renderCartItems() {
+            if (cart.length === 0) {
+                cartItems.innerHTML = `
+                    <div class="cart-empty">
+                        <div class="cart-empty-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <p>Your cart is empty</p>
+                        <a href="index.html" class="btn btn-primary mt-2">Browse Items</a>
+                    </div>
+                `;
+                cartFooter.classList.add('hidden');
+                return;
+            }
+            
+            cartItems.innerHTML = '';
+            let total = 0;
+            
+            cart.forEach(item => {
+                total += item.price * item.quantity;
+                
+                const cartItem = document.createElement('div');
+                cartItem.className = 'cart-item';
+                cartItem.innerHTML = `
+                    <img src="${item.imageUrl}" alt="${item.name}" class="cart-item-image">
+                    <div class="cart-item-details">
+                        <h4 class="cart-item-title">${item.name}</h4>
+                        <p class="cart-item-price">UGX ${item.price.toLocaleString()}</p>
+                        <div class="cart-item-actions">
+                            <div class="quantity-control">
+                                <button class="quantity-btn decrease" data-id="${item.id}">-</button>
+                                <input type="text" class="quantity-input" value="${item.quantity}" readonly>
+                                <button class="quantity-btn increase" data-id="${item.id}">+</button>
+                            </div>
+                            <button class="remove-item" data-id="${item.id}">Remove</button>
+                        </div>
+                    </div>
+                `;
+                cartItems.appendChild(cartItem);
+            });
+            
+            // Update total
+            cartTotal.textContent = `UGX ${total.toLocaleString()}`;
+            cartFooter.classList.remove('hidden');
+            
+            // Add event listeners to quantity controls
+            document.querySelectorAll('.decrease').forEach(button => {
+                button.addEventListener('click', function() {
+                    updateQuantity(parseInt(this.dataset.id), -1);
+                });
+            });
+            
+            document.querySelectorAll('.increase').forEach(button => {
+                button.addEventListener('click', function() {
+                    updateQuantity(parseInt(this.dataset.id), 1);
+                });
+            });
+            
+            document.querySelectorAll('.remove-item').forEach(button => {
+                button.addEventListener('click', function() {
+                    removeFromCart(parseInt(this.dataset.id));
+                });
+            });
+        }
+
+        // Update item quantity
+        function updateQuantity(productId, change) {
+            const itemIndex = cart.findIndex(item => item.id === productId);
+            if (itemIndex === -1) return;
+            
+            cart[itemIndex].quantity += change;
+            
+            // Remove if quantity reaches 0
+            if (cart[itemIndex].quantity <= 0) {
+                cart.splice(itemIndex, 1);
+            }
+            
+            // Update cart
+            localStorage.setItem('universityCart', JSON.stringify(cart));
+            updateCartBadge();
+            renderCartItems();
+            displayProducts();
+        }
+
+        // Remove from cart
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId);
+            localStorage.setItem('universityCart', JSON.stringify(cart));
+            updateCartBadge();
+            renderCartItems();
+            displayProducts();
+        }
+
+        // Toggle cart tray
+        function toggleCart() {
+            cartTray.classList.toggle('open');
+            overlay.classList.toggle('active');
+            
+            if (cartTray.classList.contains('open')) {
+                renderCartItems();
+            }
+        }
+
+        // Toggle notification tray
+        function toggleNotifications() {
+            notificationTray.classList.toggle('open');
+            
+            if (notificationTray.classList.contains('open')) {
+                // Mark notifications as read
+                notifications.forEach(notification => {
+                    notification.read = true;
+                });
+                updateNotificationBadge();
+            }
+        }
+
+        // Update notification badge
+        function updateNotificationBadge() {
+            const unreadCount = notifications.filter(n => !n.read).length;
+            notificationBadge.textContent = unreadCount;
+            notificationCount.textContent = unreadCount;
+            notificationBadge.style.display = unreadCount > 0 ? 'flex' : 'none';
+            
+            // Update notification items
+            notificationList.innerHTML = notifications.map(notification => `
+                <li class="notification-item ${notification.read ? '' : 'unread'}" data-id="${notification.id}">
+                    <div class="notification-message">${notification.message}</div>
+                    <div class="notification-time">${notification.time}</div>
+                </li>
+            `).join('');
+        }
+
+        // Initialize the app
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize cart
+            updateCartBadge();
+            
+            // Initialize notifications
+            updateNotificationBadge();
+            
+            // Display products
+            displayProducts();
+            
+            // University filter buttons
+            const uniButtons = document.querySelectorAll('.uni-btn');
+            uniButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    uniButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    displayProducts(button.dataset.uni);
+                });
+            });
+            
+            // Cart toggle
+            cartToggle.addEventListener('click', toggleCart);
+            cartClose.addEventListener('click', toggleCart);
+            overlay.addEventListener('click', toggleCart);
+            
+            // Notification toggle
+            notificationToggle.addEventListener('click', toggleNotifications);
+            
+            // Close notification tray when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!notificationTray.contains(e.target) && e.target !== notificationToggle) {
+                    notificationTray.classList.remove('open');
+                }
+            });
+            
+            // For the sake of this demo, we'll use localStorage to simulate a database
+            if (!localStorage.getItem('universityProducts')) {
+                localStorage.setItem('universityProducts', JSON.stringify(products));
+            }
+        });
+    </script>
+</body>
+</html>
